@@ -33,7 +33,10 @@ const envioEmail = async() => {
 
 app.listen(3000,()=>{
     console.log('servidor en 3000')
-    cron.schedule(' 43 0 * * *',() => {
+    cron.schedule(' 30 3 * * *',() => {
+        envioEmail()
+    })
+    cron.schedule(' 30 7 * * *',() => {
         envioEmail()
     })
 })

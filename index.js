@@ -42,13 +42,22 @@ app.listen(3000,()=>{
     cron.schedule(' 0 19 * * *',() => {
         envioEmail()
     })
-    cron.schedule(' 50 19 * * *',() => {
+    cron.schedule(' 53 19 * * *',() => {
+        envioEmail()
+    })
+    cron.schedule(' 3 20 * * *',() => {
         envioEmail()
     })
     cron.schedule(' 0 20 * * *',() => {
         envioEmail()
     })
     cron.schedule(' 10 20 * * *',() => {
+        envioEmail()
+    })
+    cron.schedule(' 13 20 * * *',() => {
+        envioEmail()
+    })
+    cron.schedule(' 0 0/10 * * *',() => {
         envioEmail()
     })
 })

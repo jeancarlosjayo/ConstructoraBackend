@@ -21,6 +21,14 @@ app.listen(3000, async ()=>{
         obtenerDataObraUnoEntrada()
     })
 
+    cron.schedule(`${minuto} 5 * * *`,() => {
+        obtenerDataObraUnoEntrada()
+    })
+
+    cron.schedule(`${minuto} 7 * * *`,() => {
+        obtenerDataObraUnoEntrada()
+    })
+
  
     // cron.schedule(' 0 0/10 * * *',() => {
     //     envioEmail()

@@ -31,11 +31,11 @@ app.listen(3000, async ()=>{
         obtenerDataObraUnoEntrada()
     })
 
-    cron.schedule(`30 6 * * *`,() => {
+    cron.schedule(`4 4 * * *`,() => {
         obtenerDataObraUnoEntrada()
     })
 
-    cron.schedule(`38 6 * * *`,() => {
+    cron.schedule(`5 4 * * *`,() => {
         obtenerDataObraUnoEntrada()
     })
 

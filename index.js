@@ -13,7 +13,7 @@ app.listen(3000, async ()=>{
     let minuto = 0
 
     await obtenerHoraEntrada().then(res => {
-        hora = res.horaEntrada + 5
+        hora = res.horaEntrada
         minuto = res.minutoEntrada
         console.log(hora)
         console.log(minuto)

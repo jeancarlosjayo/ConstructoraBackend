@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<body>
+    <h2 style="font-size:14px">Este es el reporte de la <strong>asistencia de entrada</strong> a la fecha {{diaString}}</h2>
+    <div>
+        <table style="border-collapse: collapse;
+        width: 100%;">
+            <tr>
+                <th style=" border: 1px solid #ddd;
+            padding: 8px;  padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;">
+                    Nombres</th>
+                <th style=" border: 1px solid #ddd;
+            padding: 8px;  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;">DNI</th>
+                <th style=" border: 1px solid #ddd;
+            padding: 8px;  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;">Hora de Ingreso</th>
+                <th style=" border: 1px solid #ddd;
+            padding: 8px;  padding-top: 12px;
+  padding-bottom: 12px;
+  text-align: left;
+  background-color: #4CAF50;
+  color: white;">Hora de Salida</th>
+            </tr>
+            {{#if data}}
+            {{#each data}}
+            <tr>
+                <td style=" border: 1px solid #ddd;
+                    padding: 8px;">{{names}}</td>
+                <td style=" border: 1px solid #ddd;
+                     padding: 8px;">{{dni}}</td>
+                <td style=" border: 1px solid #ddd;
+                    padding: 8px;">{{timeenter}}</td>
+                <td style=" border: 1px solid #ddd;
+                    padding: 8px;">{{timeexit}}</td>
+            </tr>
+            {{/each}}
+            {{/if}}
+        </table>
+    </div>
+    <a href="http://localhost:3000/descargarobraexcel/1234">Exportar en Excel</a>
+</body>
+
+</html>

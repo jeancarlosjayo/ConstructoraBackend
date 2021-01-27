@@ -1,63 +1,31 @@
 const  express = require('express')
 const nodemailer = require('nodemailer')
 const cron = require('node-cron');
-
+const { obtenerDataObraUnoEntrada,obtenerHoraEntrada } = require('./obras/obreUno');
 const app = express()
 
-const envioEmail = async() => {
 
-    let transporter = nodemailer.createTransport({
-        host: "smtp.gmail.com",
-        port: 465,
-        secure: true,
-        auth: {
-            user:'gerardoquispe65@gmail.com',
-            pass:'dgubhaaendarolvo'
-        },
-      });
 
-    transporter.verify().then(res => {
-        console.log(res)
-        console.log('ready')
-    }).catch(ex => {
-        console.log(ex)
+
+app.listen(3000, async ()=>{
+
+    let hora = 0
+    await obtenerHoraEntrada().then(res => {
+        hora = res.horaEntrada 
+        minuto = res.minutoEntrada
+        console.log(hora)
+        console.log(minuto)
+    })
+    
+    cron.schedule(`${minuto} ${hora} * * *`,() => {
+        obtenerDataObraUnoEntrada()
     })
 
-    await transporter.sendMail({
-        from:'Envio email gerardoquispe65@gmail.com',
-        to: 'jeancarlosramirezjayo@gmail.com,gerardoquispe65@gmail.com,gerardo.dondearchivo@outlook.com',
-        subject:'ENvio de emai,',
-        text:'Envio correcto de email 2021',
-    })
-}
+ 
+    // cron.schedule(' 0 0/10 * * *',() => {
+    //     envioEmail()
+    // })
 
-app.listen(3000,()=>{
-    console.log('servidor en 3000')
-    cron.schedule(' 0 14 * * *',() => {
-        envioEmail()
-    })
-    cron.schedule(' 0 15 * * *',() => {
-        envioEmail()
-    })
-    cron.schedule(' 0 19 * * *',() => {
-        envioEmail()
-    })
-    cron.schedule(' 53 19 * * *',() => {
-        envioEmail()
-    })
-    cron.schedule(' 3 20 * * *',() => {
-        envioEmail()
-    })
-    cron.schedule(' 0 20 * * *',() => {
-        envioEmail()
-    })
-    cron.schedule(' 10 20 * * *',() => {
-        envioEmail()
-    })
-    cron.schedule(' 13 20 * * *',() => {
-        envioEmail()
-    })
-    cron.schedule(' 0 0/10 * * *',() => {
-        envioEmail()
-    })
+    
+    
 })

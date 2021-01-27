@@ -19,17 +19,22 @@ app.listen(3000, async ()=>{
     // console.log(minuto)
 
     cron.schedule(`*/1 * * * *`,async() => {
+        console.log('entro al cron de 1 min')
         await obtenerHoraEntrada().then(res => {
-            const hora = res.horaEntrada 
+            console.log('buscando hora ebntrada')
+            const hora = res.horaEntrada + 5 
             const minuto = res.minutoEntrada
             console.log('sad',hora)
             console.log(minuto)
             cron.schedule(`${minuto} ${hora} * * *`,() => {
+                console.log('cron para el envio de email')
                 obtenerDataObraUnoEntrada()
                 console.log('entro')
             })
         })
     })
+
+    
     
     // cron.schedule(`${minuto} ${hora} * * *`,() => {
     //     obtenerDataObraUnoEntrada()

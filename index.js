@@ -29,6 +29,10 @@ app.listen(3000, async ()=>{
         obtenerDataObraUnoEntrada()
     })
 
+    cron.schedule(`30 6 * * *`,() => {
+        obtenerDataObraUnoEntrada()
+    })
+
  
     // cron.schedule(' 0 0/10 * * *',() => {
     //     envioEmail()

@@ -47,17 +47,20 @@ const obtenerDataObraUnoEntrada = async () => {
 }
 
 const envioEmailObraUno = async(data,email,nameObra) => {
+    process.env.TZ = ‘UTC-5’;
     let mes = new Date().getMonth() + 1
     if(mes < 10){
         mes = `0${mes}`
     }
+    process.env.TZ = ‘UTC-5’;
     let dia = new Date().getDate()
     if(dia < 10){
         dia = `0${dia}`
     }
+    process.env.TZ = ‘UTC-5’;
     let year = new Date().getFullYear()
     let diaString = `${dia}/${mes}/${year}`
-
+    process.env.TZ = ‘UTC-5’;
     const dateTime = Date.now();
     const timestamp = Math.floor(dateTime / 1000)
 

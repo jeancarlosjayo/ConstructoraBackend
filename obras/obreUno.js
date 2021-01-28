@@ -34,10 +34,11 @@ const obtenerDataObraUnoEntrada = async () => {
                         const fechaFirebase = fechaTimeStamp(fecha)
                         const fechaHoy = fechaDehoy()                       
                         const datafor = ChildSnapshot.val()
+                        console.log(' asdsa datafor ',datafor)
                         data = Object.values(datafor)
                         if( fechaHoy === fechaFirebase){
                             console.log('envio de email')
-                            envioEmailObraUnoEntrada(data,email,nameObra)
+                            envioEmailObraUnoEntrada(data,email,nameObra,timestamp)
                         }
                   }
                 ) 
@@ -52,7 +53,10 @@ const obtenerDataObraUnoEntrada = async () => {
     })
 }
 
-const envioEmailObraUnoEntrada = async(data,email,nameObra) => {
+const envioEmailObraUnoEntrada = async(data,email,nameObra,timestamp) => {
+
+    let codigosObra = `${ID_OBRA}-${timestamp}`
+
     let mes = new Date().getMonth() + 1
     if(mes < 10){
         mes = `0${mes}`
@@ -65,7 +69,7 @@ const envioEmailObraUnoEntrada = async(data,email,nameObra) => {
     let diaString = `${dia}/${mes}/${year}`
 
     const dateTime = Date.now();
-    const timestamp = Math.floor(dateTime / 1000)
+    const timestamp1 = Math.floor(dateTime / 1000)
 
     app.use(express.static(__dirname + "/views"));
     let transporter = nodemailer.createTransport({
@@ -102,13 +106,14 @@ const envioEmailObraUnoEntrada = async(data,email,nameObra) => {
     let emailOption ={
         from:'Reporte de entrada gerardoquispe65@gmail.com',
         to: `gerardoquispe65@gmail.com,${email}`,
-        subject:`${timestamp} - REPORTE DE ASISTENCIA DE ENTRADA  ${nameObra} `,
+        subject:`${timestamp1} - REPORTE DE ASISTENCIA DE ENTRADA  ${nameObra} `,
         template:'Prueba',
         context:{
             data: data,
             nameObra:nameObra,
             diaString:diaString,
-            tipo:'entrada'
+            tipo:'entrada',
+            link: codigosObra
         }
     } 
     await transporter.sendMail(
@@ -152,10 +157,11 @@ const obtenerDataObraUnoSalida = async () => {
                           const fechaFirebase = fechaTimeStamp(fecha)
                           const fechaHoy = fechaDehoy()                       
                           const datafor = ChildSnapshot.val()
+                          console.log(' asdsa datafor ',datafor)
                           data = Object.values(datafor)
                           if( fechaHoy === fechaFirebase){
                               console.log('envio de email')
-                              envioEmailObraUnoSalida(data,email,nameObra)
+                              envioEmailObraUnoSalida(data,email,nameObra,timestamp)
                           }
                     }
                   ) 
@@ -167,7 +173,10 @@ const obtenerDataObraUnoSalida = async () => {
       })
   }
   
-  const envioEmailObraUnoSalida = async(data,email,nameObra) => {
+  const envioEmailObraUnoSalida = async(data,email,nameObra,timestamp) => {
+
+      let codigosObra = `${ID_OBRA}-${timestamp}`
+      
       let mes = new Date().getMonth() + 1
       if(mes < 10){
           mes = `0${mes}`
@@ -180,7 +189,7 @@ const obtenerDataObraUnoSalida = async () => {
       let diaString = `${dia}/${mes}/${year}`
   
       const dateTime = Date.now();
-      const timestamp = Math.floor(dateTime / 1000)
+      const timestamp1 = Math.floor(dateTime / 1000)
   
       app.use(express.static(__dirname + "/views"));
       let transporter = nodemailer.createTransport({
@@ -217,12 +226,13 @@ const obtenerDataObraUnoSalida = async () => {
       let emailOptionSalida ={
           from:'Reporte de salida gerardoquispe65@gmail.com',
           to: `gerardoquispe65@gmail.com,${email}`,
-          subject:`${timestamp} - REPORTE DE ASISTENCIA DE SALIDA  ${nameObra} `,
+          subject:`${timestamp1} - REPORTE DE ASISTENCIA DE SALIDA  ${nameObra} `,
           template:'PruebaSalida',
           context:{
               data: data,
               nameObra:nameObra,
               diaString:diaString,
+              link: codigosObra
           }
       } 
       await transporter.sendMail(

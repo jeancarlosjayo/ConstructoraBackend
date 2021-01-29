@@ -1,7 +1,8 @@
 const  express = require('express')
 const { obtenerDataObraUnoEntrada,obtenerHoraEntrada, obtenerHoraSalida, obtenerDataObraUnoSalida } = require('./obras/obreUno');
 const app = express()
-
+var cron = require('node-cron');
+ 
 
 
 
@@ -61,8 +62,13 @@ app.listen(4000, async ()=>{
 
 
 
-    ObraUnoEntrada()
-    ObraUnoSalida()
+    cron.schedule('*/1 * * * *', () => {
+        console.log('entro al node cron xd')
+        ObraUnoEntrada()
+        ObraUnoSalida()
+    });
+      
+    
     
     
     

@@ -4,7 +4,6 @@ const express = require('express')
 const hbs = require('nodemailer-express-handlebars')
 const { fechaDehoy , fechaTimeStamp} = require('../helpers/Fechas')
 const ID_OBRA='1610679134'
-
 const app = express()
 
 const obtenerDataObraUnoEntrada = async () => {

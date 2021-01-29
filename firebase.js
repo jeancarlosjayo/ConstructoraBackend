@@ -1,5 +1,5 @@
 
-const jsonfirbsae = require('./firebasedata/constructorapp-fdffb-firebase-adminsdk-h2cod-ecb73572bf.json')
+const jsonfirbsae = require('./constructorapp-fdffb-firebase-adminsdk-h2cod-ecb73572bf.json')
 
 const admin = require('firebase-admin')
 

@@ -5,7 +5,7 @@ const admin = require('firebase-admin')
 
 admin.initializeApp({
   // credential: admin.credential.cert(jsonfirbsae),
-  credential: admin.credential.cert(process.env.GOOGLE_APPLICATION_CREDENTIALS),
+  credential: admin.credential.applicationDefault(),
   databaseURL:'https://constructorapp-fdffb-default-rtdb.firebaseio.com'
 })
 

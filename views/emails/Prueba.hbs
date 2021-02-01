@@ -21,22 +21,22 @@
                     Nombres</th>
                 <th style=" border: 1px solid #ddd;
             padding: 8px;  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #4CAF50;
-  color: white;">DNI</th>
-                <th style=" border: 1px solid #ddd;
-            padding: 8px;  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #4CAF50;
-  color: white;">Hora de Ingreso</th>
-                <th style=" border: 1px solid #ddd;
-            padding: 8px;  padding-top: 12px;
-  padding-bottom: 12px;
-  text-align: left;
-  background-color: #4CAF50;
-  color: white;">Hora de Salida</th>
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;">DNI</th>
+                            <th style=" border: 1px solid #ddd;
+                        padding: 8px;  padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;">Hora de Ingreso</th>
+                            <th style=" border: 1px solid #ddd;
+                        padding: 8px;  padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #4CAF50;
+            color: white;">Hora de Salida</th>
             </tr>
             {{#if data}}
             {{#each data}}
@@ -53,9 +53,10 @@
             {{/each}}
             {{/if}}
         </table>
-        <h1>{{link}}</h1>
     </div>
-    <a href="https://contructora-frontend.netlify.app/descargarobraexcel/{{link}}">Exportar en Excel</a>
+    <a href="https://contructora-frontend.netlify.app/descargarobraexcel/{{link}}" 
+    style="background-color: #4CAF50;
+    color: white; width: 200px; margin: 20px 0px; border-radius:25px" >Exportar en Excel</a>
 </body>
 
 </html>

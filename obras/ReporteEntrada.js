@@ -128,8 +128,11 @@ const obtenerDataObraUnoEntrada = async (ID_OBRA) => {
           port: 465,
           secure: true,
           auth: {
-              user:'jeancarlosramirezjayo@gmail.com',
-              pass:'ylpbdnskzhutpdix'
+            //   user:'jeancarlosramirezjayo@gmail.com',
+              user:'assistanceconstructorapp@gmail.com',
+            //   pass:'ylpbdnskzhutpdix'
+              pass:'pcdqsxluvxphbslw'
+
           },
         });
   

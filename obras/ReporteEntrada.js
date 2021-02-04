@@ -159,7 +159,7 @@ const obtenerDataObraUnoEntrada = async (ID_OBRA) => {
   
       let emailOption ={
           from:'Reporte de entrada gerardoquispe65@gmail.com',
-          to: `gerardoquispe65@gmail.com,${email}`,
+          to: `${email}`,
           subject:`${timestamp1} - REPORTE DE ASISTENCIA DE ENTRADA  ${nameObra} `,
           template:'Prueba',
           context:{

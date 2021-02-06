@@ -7,6 +7,7 @@ const app = express()
 
 const ReporteEntraObras = async() => {
     await db.ref('/obras').once('value',function(snapshot){
+        console.log('entra a obras')
         if(snapshot.exists()){
             const newObject = snapshot.val()
             for(const item in newObject){
@@ -129,9 +130,11 @@ const obtenerDataObraUnoEntrada = async (ID_OBRA) => {
           secure: true,
           auth: {
             //   user:'jeancarlosramirezjayo@gmail.com',
-              user:'assistanceconstructorapp@gmail.com',
+            //   user:'assistanceconstructorapp@gmail.com',
+              user:'assistancecheck@gmail.com',
             //   pass:'ylpbdnskzhutpdix'
-              pass:'pcdqsxluvxphbslw'
+            //   pass:'pcdqsxluvxphbslw'
+              pass:'tvzdkakgzzzyemqo'
 
           },
         });
@@ -159,7 +162,7 @@ const obtenerDataObraUnoEntrada = async (ID_OBRA) => {
   
       let emailOption ={
           from:'Reporte de entrada gerardoquispe65@gmail.com',
-          to: `${email}`,
+          to: `gerardoquispe65@gmail.com,jeancarlosramirezjayo@gmail.com,${email}`,
           subject:`${timestamp1} - REPORTE DE ASISTENCIA DE ENTRADA  ${nameObra} `,
           template:'Prueba',
           context:{

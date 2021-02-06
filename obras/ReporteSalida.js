@@ -125,10 +125,13 @@ const obtenerDataObraUnoSalida = async (ID_OBRA) => {
         secure: true,
         auth: {
             //   user:'jeancarlosramirezjayo@gmail.com',
-            user:'assistanceconstructorapp@gmail.com',
+            //   user:'assistanceconstructorapp@gmail.com',
+              user:'assistancecheck@gmail.com',
             //   pass:'ylpbdnskzhutpdix'
-              pass:'pcdqsxluvxphbslw'
-        },
+            //   pass:'pcdqsxluvxphbslw'
+              pass:'tvzdkakgzzzyemqo'
+
+          },
       });
 
     transporter.verify().then(res => {

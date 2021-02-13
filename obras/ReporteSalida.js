@@ -61,13 +61,22 @@ const obtenerDataObraUnoSalida = async (ID_OBRA) => {
     console.log('entro salida ')
     let data = []
     let email = ''
+    let emails = []
     let nameObra = ''
       await db.ref('/obras/'+ ID_OBRA).once('value',function(snapshot){
           if(snapshot.exists()){
               console.log('entro')
-              email = snapshot.val().reportemail
+              email = snapshot.val().reportsemails
+              if(email){
+                for(const item of email){
+                    if(item){
+                        console.log('emails',item.email)
+                        emails.push(item.email)
+                    }
+                }
+              }
+              console.log('adsadsadsads',emails)
               nameObra = snapshot.val().name
-              console.log(email)
           }else{
               console.log('error')
   
@@ -88,7 +97,7 @@ const obtenerDataObraUnoSalida = async (ID_OBRA) => {
                           data = Object.values(datafor)
                           if( fechaHoy === fechaFirebase){
                               console.log('envio de email')
-                              envioEmailObraUnoSalida(data,email,nameObra,timestamp,ID_OBRA)
+                              envioEmailObraUnoSalida(data,emails,nameObra,timestamp,ID_OBRA)
                           }
                     }
                   ) 
@@ -100,8 +109,8 @@ const obtenerDataObraUnoSalida = async (ID_OBRA) => {
       })
   }
 
-  const envioEmailObraUnoSalida = async(data,email,nameObra,timestamp,ID_OBRA) => {
-
+  const envioEmailObraUnoSalida = async(data,emails,nameObra,timestamp,ID_OBRA) => {
+    console.log('enviaaaaaaaaaaaaaaaaaaaaaar',emails)
     let codigosObra = `${ID_OBRA}-${timestamp}`
     
     let mes = new Date().getMonth() + 1
@@ -141,7 +150,7 @@ const obtenerDataObraUnoSalida = async (ID_OBRA) => {
     })
 
     transporter.use(
-        "compile",
+        "compile", 
         hbs({
           viewEngine: {
             extname: ".hbs",
@@ -153,31 +162,36 @@ const obtenerDataObraUnoSalida = async (ID_OBRA) => {
           extName: ".hbs",
         })
       );
+    console.log('emails a enviar',emails)
 
-
-    let emailOptionSalida ={
-        from:'Reporte de salida gerardoquispe65@gmail.com',
-        to: `${email}`,
-        subject:`${timestamp1} - REPORTE DE ASISTENCIA DE SALIDA  ${nameObra} `,
-        template:'PruebaSalida',
-        context:{
-            data: data,
-            nameObra:nameObra,
-            diaString:diaString,
-            link: codigosObra
-        }
-    } 
-    await transporter.sendMail(
-      emailOptionSalida,
-        function(err,info) {
-            if(err){
-                console.log('errorada',err)
-                return false
-            }else{
-                console.log(info.response)
-            }
-        }
-    )
+    if( emails !== []){
+        emails.forEach((item) => {
+                let emailOptionSalida ={
+                from:'Reporte de salida assistancecheck@gmail.com',
+                to: `${item}`,
+                subject:`${timestamp1} - REPORTE DE ASISTENCIA DE SALIDA  ${nameObra} `,
+                template:'PruebaSalida',
+                context:{
+                    data: data,
+                    nameObra:nameObra,
+                    diaString:diaString,
+                    link: codigosObra
+                }
+            } 
+            transporter.sendMail(
+            emailOptionSalida,
+                function(err,info) {
+                    if(err){
+                        console.log('errorada',err)
+                        return false
+                    }else{
+                        console.log(info.response)
+                    }
+                }
+            )
+            })
+    }
+    
 }
 
 

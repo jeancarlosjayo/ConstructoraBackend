@@ -63,11 +63,21 @@ const obtenerDataObraUnoEntrada = async (ID_OBRA) => {
     console.log('entro')
     let data = []
     let email = ''
+    let emails = []
     let nameObra = ''
       await db.ref('/obras/'+ ID_OBRA).once('value',function(snapshot){
           if(snapshot.exists()){
               console.log('entro')
-              email = snapshot.val().reportemail
+              email = snapshot.val().reportsemails
+              if(email){
+                for(const item of email){
+                    if(item){
+                        console.log('emails',item.email)
+                        emails.push(item.email)
+                    }
+                }
+              }
+              console.log('adsadsadsads',emails)
               nameObra = snapshot.val().name
               console.log(email)
           }else{
@@ -84,18 +94,18 @@ const obtenerDataObraUnoEntrada = async (ID_OBRA) => {
                           const timestamp  =  ChildSnapshot.key 
                           const fecha = new Date(timestamp*1000)
                           const fechaFirebase = fechaTimeStamp(fecha)
-                          const fechaHoy = fechaDehoy()                       
+                          console.log(fechaFirebase)
+                          const fechaHoy = fechaDehoy() 
+                          console.log(fechaHoy)                      
                           const datafor = ChildSnapshot.val()
                           console.log(' asdsa datafor ',datafor)
                           data = Object.values(datafor)
                           if( fechaHoy === fechaFirebase){
                               console.log('envio de email')
-                              envioEmailObraUnoEntrada(data,email,nameObra,timestamp,ID_OBRA)
+                              envioEmailObraUnoEntrada(data,emails,nameObra,timestamp,ID_OBRA)
                           }
                     }
                   ) 
-            
-             
           }else{
               console.log('error')
   
@@ -105,8 +115,8 @@ const obtenerDataObraUnoEntrada = async (ID_OBRA) => {
       })
   }
   
-  const envioEmailObraUnoEntrada = async(data,email,nameObra,timestamp,ID_OBRA) => {
-  
+  const envioEmailObraUnoEntrada = async(data,emails,nameObra,timestamp,ID_OBRA) => {
+      console.log('enviaaaaaaaaaaaaaaaaaaaaaar',emails)
       let codigosObra = `${ID_OBRA}-${timestamp}`
   
       let mes = new Date().getMonth() + 1
@@ -159,31 +169,37 @@ const obtenerDataObraUnoEntrada = async (ID_OBRA) => {
           })
         );
   
-  
-      let emailOption ={
-          from:'Reporte de entrada gerardoquispe65@gmail.com',
-          to: `gerardoquispe65@gmail.com,jeancarlosramirezjayo@gmail.com,${email}`,
-          subject:`${timestamp1} - REPORTE DE ASISTENCIA DE ENTRADA  ${nameObra} `,
-          template:'Prueba',
-          context:{
-              data: data,
-              nameObra:nameObra,
-              diaString:diaString,
-              tipo:'entrada',
-              link: codigosObra
-          }
-      } 
-      await transporter.sendMail(
-          emailOption,
-          function(err,info) {
-              if(err){
-                  console.log('errorada',err)
-                  return false
-              }else{
-                  console.log(info.response)
-              }
-          }
-      )
+    if( emails !== []){
+
+        emails.forEach((item) => {
+            let emailOption ={
+                from:'Reporte de entrada assistancecheck@gmail.com',
+                to: `${item}`,
+                subject:`${timestamp1} - REPORTE DE ASISTENCIA DE ENTRADA  ${nameObra} `,
+                template:'Prueba',
+                context:{
+                    data: data,
+                    nameObra:nameObra,
+                    diaString:diaString,
+                    tipo:'entrada',
+                    link: codigosObra
+                }
+            } 
+            transporter.sendMail(
+                emailOption,
+                function(err,info) {
+                    if(err){
+                        console.log('errorada',err)
+                        return false
+                    }else{
+                        console.log(info.response)
+                    }
+                }
+            )
+        })
+    
+    }    
+      
   }
 
 

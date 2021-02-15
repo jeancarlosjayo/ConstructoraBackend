@@ -16,27 +16,69 @@
             padding: 8px;  padding-top: 12px;
             padding-bottom: 12px;
             text-align: left;
-            background-color: #4CAF50;
+            background-color: #122555;
             color: white;">
                     Nombres</th>
                 <th style=" border: 1px solid #ddd;
             padding: 8px;  padding-top: 12px;
             padding-bottom: 12px;
             text-align: left;
-            background-color: #4CAF50;
+            background-color: #122555;
             color: white;">DNI</th>
                             <th style=" border: 1px solid #ddd;
                         padding: 8px;  padding-top: 12px;
             padding-bottom: 12px;
             text-align: left;
-            background-color: #4CAF50;
+            background-color: #122555;
             color: white;">Hora de Ingreso</th>
                             <th style=" border: 1px solid #ddd;
                         padding: 8px;  padding-top: 12px;
             padding-bottom: 12px;
             text-align: left;
-            background-color: #4CAF50;
+            background-color: #122555;
             color: white;">Hora de Salida</th>
+             <th style=" border: 1px solid #ddd;
+                        padding: 8px;  padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #122555;
+            color: white;">Categoria</th>
+             <th style=" border: 1px solid #ddd;
+                        padding: 8px;  padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #122555;
+            color: white;">Ocupacion</th>
+             <th style=" border: 1px solid #ddd;
+                        padding: 8px;  padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #122555;
+            color: white;">Planilla</th>
+              <th style=" border: 1px solid #ddd;
+                        padding: 8px;  padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #122555;
+            color: white;">Fecha de nacimiento</th>
+              <th style=" border: 1px solid #ddd;
+                        padding: 8px;  padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #122555;
+            color: white;">Fecha de vencimiento de DNI</th>
+            <th style=" border: 1px solid #ddd;
+                        padding: 8px;  padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #122555;
+            color: white;">Empresa</th>
+            <th style=" border: 1px solid #ddd;
+                        padding: 8px;  padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #122555;
+            color: white;">Ruc</th>
             </tr>
             {{#if data}}
             {{#each data}}
@@ -49,14 +91,31 @@
                     padding: 8px;">{{timeenter}}</td>
                 <td style=" border: 1px solid #ddd;
                     padding: 8px;">{{timeexit}}</td>
+                 <td style=" border: 1px solid #ddd;
+                    padding: 8px;">{{category}}</td>
+                 <td style=" border: 1px solid #ddd;
+                    padding: 8px;">{{charge}}</td>
+                 <td style=" border: 1px solid #ddd;
+                    padding: 8px;">{{payroll}}</td>
+                 <td style=" border: 1px solid #ddd;
+                    padding: 8px;">{{dayborn}}</td>
+                <td style=" border: 1px solid #ddd;
+                    padding: 8px;">{{expirationdatedni}}</td>     
+                    <td style=" border: 1px solid #ddd;
+                    padding: 8px;">{{enterprise}}</td>  
+                    <td style=" border: 1px solid #ddd;
+                    padding: 8px;">{{enterpriseruc}}</td>    
             </tr>
             {{/each}}
             {{/if}}
         </table>
     </div>
+
+    <div style="padding: 20px; border:1px solid #122555; width: 130px; margin:20px 0px;border-radius:20px;text-align:center">
     <a href="https://constructora-app.netlify.app/descargarobraexcel/{{link}}" 
-       style="background-color: #4CAF50; min-height: 300px;text-align: center;
-    color: white; width: 400px; margin: 20px 0px; border-radius:25px" >Exportar en Excel</a>
+       style="min-height: 300px;text-align: center;
+    color: #122555; width: 400px; margin: 20px 0px; border-radius:25px; text-decoration:none; font-weight:700" >Exportar en Excel</a>
+    </div>
 </body>
 
 </html>

@@ -18,10 +18,10 @@ const ReporteSalidaObras = async () => {
                     const minutoActual = new Date().getMinutes()      
                     const horarioActual = `${horaActual}:${minutoActual}`      
                     const horaFirebsae = `${hora}:${minuto}`      
-                    if(horarioActual === horaFirebsae){
+                    // if(horarioActual === horaFirebsae){
                         console.log('envio email hora salida')
                         obtenerDataObraUnoSalida(item)
-                    }
+                    // }
         
                 }).catch(ex => {
                     console.log('error',ex)
@@ -60,15 +60,20 @@ const obtenerHoraSalida = async (ID_OBRA) => {
 const obtenerDataObraUnoSalida = async (ID_OBRA) => {
     console.log('entro salida ')
     let data = []
-    let email = ''
+
     let emails = []
     let nameObra = ''
       await db.ref('/obras/'+ ID_OBRA).once('value',function(snapshot){
           if(snapshot.exists()){
               console.log('entro')
-              email = snapshot.val().reportsemails
+              const email = snapshot.val().reportsemails
+              
               if(email){
-                for(const item of email){
+                  const newemails = Object.values(email)
+                  console.log('entra al fooooooooooor')
+                for(const item of newemails){
+                    console.log(item)
+                    console.log('entra al fooooooooooor2222')
                     if(item){
                         console.log('emails',item.email)
                         emails.push(item.email)
@@ -95,10 +100,10 @@ const obtenerDataObraUnoSalida = async (ID_OBRA) => {
                           const datafor = ChildSnapshot.val()
                           console.log(' asdsa datafor ',datafor)
                           data = Object.values(datafor)
-                          if( fechaHoy === fechaFirebase){
+                        //   if( fechaHoy === fechaFirebase){
                               console.log('envio de email')
                               envioEmailObraUnoSalida(data,emails,nameObra,timestamp,ID_OBRA)
-                          }
+                        //   }
                     }
                   ) 
           }else{

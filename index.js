@@ -11,7 +11,7 @@ app.listen(4000, async ()=>{
     cron.schedule('*/1 * * * *', () => {
         console.log('entro al node cron xd')
         ReporteEntraObras()
-        ReporteSalidaObras()
+        // ReporteSalidaObras()
     });
       
   

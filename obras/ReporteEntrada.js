@@ -69,8 +69,11 @@ const obtenerDataObraUnoEntrada = async (ID_OBRA) => {
           if(snapshot.exists()){
               console.log('entro')
               email = snapshot.val().reportsemails
+              console.log('email',email)
               if(email){
-                for(const item of email){
+                const newemails = Object.values(email)
+                for(const item of newemails){
+                    console.log(item)
                     if(item){
                         console.log('emails',item.email)
                         emails.push(item.email)
@@ -100,10 +103,10 @@ const obtenerDataObraUnoEntrada = async (ID_OBRA) => {
                           const datafor = ChildSnapshot.val()
                           console.log(' asdsa datafor ',datafor)
                           data = Object.values(datafor)
-                          if( fechaHoy === fechaFirebase){
+                        //   if( fechaHoy === fechaFirebase){
                               console.log('envio de email')
                               envioEmailObraUnoEntrada(data,emails,nameObra,timestamp,ID_OBRA)
-                          }
+                        //   }
                     }
                   ) 
           }else{

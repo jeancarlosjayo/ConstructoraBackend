@@ -103,10 +103,20 @@ const obtenerDataObraUnoEntrada = async (ID_OBRA) => {
                           const datafor = ChildSnapshot.val()
                           console.log(' asdsa datafor ',datafor)
                           data = Object.values(datafor)
-                        //   if( fechaHoy === fechaFirebase){
+                        //   data.sort(function (a, b) {
+                        //     if (a.names > b.names) {
+                        //       return 1;
+                        //     }
+                        //     if (a.names < b.names) {
+                        //       return -1;
+                        //     }
+                        //     // a must be equal to b
+                        //     return 0;
+                        //   });
+                          if( fechaHoy === fechaFirebase){
                               console.log('envio de email')
                               envioEmailObraUnoEntrada(data,emails,nameObra,timestamp,ID_OBRA)
-                        //   }
+                          }
                     }
                   ) 
           }else{
@@ -147,7 +157,7 @@ const obtenerDataObraUnoEntrada = async (ID_OBRA) => {
               user:'assistancecheck@gmail.com',
             //   pass:'ylpbdnskzhutpdix'
             //   pass:'pcdqsxluvxphbslw'
-              pass:'tvzdkakgzzzyemqo'
+              pass:'ytmqtefkrmohprva'
 
           },
         });

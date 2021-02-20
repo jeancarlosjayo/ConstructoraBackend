@@ -5,6 +5,9 @@ const {
     ReporteEntraObras
 } = require('./obras/ReporteEntrada');
 const {
+    ReporteMensualObras
+} = require('./obras/ReporteMensual');
+const {
     ReporteSalidaObras
 } = require('./obras/ReporteSalida');
 
@@ -18,6 +21,8 @@ app.listen(4000, async () => {
         ReporteSalidaObras()
     });
 
-
-
+    // cron.schedule('03 10 * * *', () => {
+    //     console.log('entra al cron')
+    //     ReporteMensualObras()
+    // });
 })

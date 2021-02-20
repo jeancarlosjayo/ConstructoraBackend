@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+
+<body>
+    <h2 style="font-size:14px">RESUMEN MENSUAL - {{monthName}}</h2>
+    <h2 style="font-size:14px">{{nameObra}}</h2>
+    <div>
+        <table style="border-collapse: collapse;
+        width: 100%;">
+            <tr>
+                <th style=" border: 1px solid #ddd;
+            padding: 8px;  padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #122555;
+            color: white;">
+                    Dia</th>
+                <th style=" border: 1px solid #ddd;
+            padding: 8px;  padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #122555;
+            color: white;">Ingresaron</th>
+                <th style=" border: 1px solid #ddd;
+                        padding: 8px;  padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: #122555;
+            color: white;">Total</th>
+            </tr>
+            {{#if data}}
+            {{#each data}}
+            <tr>
+                <td style=" border: 1px solid #ddd;
+                    padding: 8px;">{{day}}</td>
+                <td style=" border: 1px solid #ddd;
+                     padding: 8px;">{{count}}</td>
+                <td style=" border: 1px solid #ddd;
+                    padding: 8px;">{{total}}</td>
+            </tr>
+            {{/each}}
+            {{/if}}
+        </table>
+    </div>
+    <div
+        style="padding: 20px; border:1px solid #122555; width: 130px; margin:20px 0px;border-radius:20px;text-align:center">
+        <a href="https://constructora-app.netlify.app/descargarobramensual/{{link}}" style="min-height: 300px;text-align: center;
+    color: #122555; width: 400px; margin: 20px 0px; border-radius:25px; text-decoration:none; font-weight:700">Exportar
+            Reporte</a>
+    </div>
+
+</body>
+
+</html>

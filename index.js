@@ -14,15 +14,15 @@ const {
 
 app.listen(4000, async () => {
 
-
     cron.schedule('*/1 * * * *', () => {
         console.log('entro al node cron xd')
         ReporteEntraObras()
         ReporteSalidaObras()
     });
 
-    // cron.schedule('03 10 * * *', () => {
-    //     console.log('entra al cron')
-    //     ReporteMensualObras()
-    // });
+    cron.schedule('25 17 * * *', () => {
+        console.log('entra al cron')
+        ReporteMensualObras()
+    });
+
 })

@@ -20,7 +20,7 @@ app.listen(4000, async () => {
         ReporteSalidaObras()
     });
 
-    cron.schedule('25 17 * * *', () => {
+    cron.schedule('45 21 * * *', () => {
         console.log('entra al cron')
         ReporteMensualObras()
     });

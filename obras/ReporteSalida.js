@@ -1,5 +1,5 @@
 const {
-    db
+    db 
 } = require('../firebase')
 const nodemailer = require('nodemailer')
 const express = require('express')
@@ -19,14 +19,29 @@ const ReporteSalidaObras = async () => {
                 obtenerHoraSalida(item).then(res => {
                     const hora = (res.horaSalida).toString()
                     const minuto = (res.minutoSalida).toString()
+                    const horaWeekend = (res.horaSalidaWeekend).toString()
+                    const minutoWeekend = (res.minutoSalidaWeekend).toString()
                     const horaActual = new Date().getHours()
                     const minutoActual = new Date().getMinutes()
                     const horarioActual = `${horaActual}:${minutoActual}`
                     const horaFirebsae = `${hora}:${minuto}`
-                    if (horarioActual === horaFirebsae) {
-                        console.log('envio email hora salida')
-                        obtenerDataObraUnoSalida(item)
+                    const horaFirebaseWeekend = `${horaWeekend}:${minutoWeekend}`
+                    const day = new Date().getDay()
+
+                    if((day === 6 || day === 0)){
+                        if (horarioActual === horaFirebaseWeekend) {
+                            console.log('envio email hora salida')
+                            //Funcion para obtener la data de esa obra en especifico, se le pasa el id de la obra
+                            obtenerDataObraUnoSalida(item)
+                        }
+                    }else{
+                        if (horarioActual === horaFirebsae) {
+                            console.log('envio email hora salida')
+                            obtenerDataObraUnoSalida(item)
+                        }
                     }
+
+                    
 
                 }).catch(ex => {
                     console.log('error', ex)
@@ -44,12 +59,20 @@ const ReporteSalidaObras = async () => {
 const obtenerHoraSalida = async (ID_OBRA) => {
     let horaSalida = ''
     let minutoSalida = ''
+    let horaSalidaWeekend = ''
+    let minutoSalidaWeekend = ''
     await db.ref('/obras/' + ID_OBRA).once('value', function (snapshot) {
         if (snapshot.exists()) {
             const horaBD = snapshot.val().timefinish
+            const horaBDWeekend = snapshot.val().timefinish2
             const ArrayHora = horaBD.split(':')
             horaSalida = parseInt(ArrayHora[0])
             minutoSalida = parseInt(ArrayHora[1])
+            if(horaBDWeekend){
+                const ArrayHoraWeekend = horaBDWeekend.split(':')
+                horaSalidaWeekend = parseInt(ArrayHoraWeekend[0])
+                minutoSalidaWeekend = parseInt(ArrayHoraWeekend[1])
+            }
         } else {
             console.log('error')
 
@@ -58,7 +81,9 @@ const obtenerHoraSalida = async (ID_OBRA) => {
     })
     return {
         horaSalida,
-        minutoSalida
+        minutoSalida,
+        horaSalidaWeekend,
+        minutoSalidaWeekend
     }
 }
 

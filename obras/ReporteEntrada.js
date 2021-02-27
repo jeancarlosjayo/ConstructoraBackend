@@ -25,17 +25,28 @@ const ReporteEntraObras = async () => {
                 obtenerHoraEntrada(item).then(res => {
                     const hora = (res.horaEntrada).toString()
                     const minuto = (res.minutoEntrada).toString()
+                    const horaWeekend = (res.horaEntradaWeekend).toString()
+                    const minutoWeekend = (res.minutoEntradaWeekend).toString()
                     const horaActual = new Date().getHours()
                     const minutoActual = new Date().getMinutes()
                     const horarioActual = `${horaActual}:${minutoActual}`
                     const horaFirebsae = `${hora}:${minuto}`
+                    const horaFirebaseWeekend = `${horaWeekend}:${minutoWeekend}`
+                    const day = new Date().getDay()
                     //Evaluamos si la hora actual es igual a la que la hora que tenemos en la BD
-                    if (horarioActual === horaFirebsae) {
-                        console.log('envio email hora entrada')
-                        //Funcion para obtener la data de esa obra en especifico, se le pasa el id de la obra
-                        obtenerDataObraUnoEntrada(item)
+                    if((day === 6 || day === 0)){
+                        if (horarioActual === horaFirebaseWeekend) {
+                            console.log('envio email hora entrada')
+                            //Funcion para obtener la data de esa obra en especifico, se le pasa el id de la obra
+                            obtenerDataObraUnoEntrada(item)
+                        }
+                    }else{
+                        if (horarioActual === horaFirebsae) {
+                            console.log('envio email hora entrada')
+                            //Funcion para obtener la data de esa obra en especifico, se le pasa el id de la obra
+                            obtenerDataObraUnoEntrada(item)
+                        }
                     }
-
                 }).catch(ex => {
 
                 })
@@ -53,13 +64,21 @@ const ReporteEntraObras = async () => {
 const obtenerHoraEntrada = async (ID_OBRA) => {
     let horaEntrada = ''
     let minutoEntrada = ''
+    let horaEntradaWeekend = ''
+    let minutoEntradaWeekend = ''
     //Llamado al nodo obras y a la obra en especifico
     await db.ref('/obras/' + ID_OBRA).once('value', function (snapshot) {
         if (snapshot.exists()) {
             const horaBD = snapshot.val().timestart
+            const horaBDWeekend = snapshot.val().timestart2
             const ArrayHora = horaBD.split(':')
             horaEntrada = parseInt(ArrayHora[0])
             minutoEntrada = parseInt(ArrayHora[1])
+            if(horaBDWeekend){
+                const ArrayHoraWeekend = horaBDWeekend.split(':')
+                horaEntradaWeekend = parseInt(ArrayHoraWeekend[0])
+                minutoEntradaWeekend = parseInt(ArrayHoraWeekend[1])
+            }
         } else {
             console.log('error')
             return null
@@ -68,7 +87,9 @@ const obtenerHoraEntrada = async (ID_OBRA) => {
     //se devuelve la hora de la BD
     return {
         horaEntrada,
-        minutoEntrada
+        minutoEntrada,
+        horaEntradaWeekend,
+        minutoEntradaWeekend
     }
 }
 

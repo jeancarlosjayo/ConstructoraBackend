@@ -12,6 +12,27 @@ const {
 } = require('./obras/ReporteSalida');
 
 
+app.use(function(req, res, next) {
+    res.header('Access-Control-Allow-Origin', '*');
+    res.header('Access-Control-Allow-Headers', '*');
+    res.header('Access-Control-Allow-Methods', 'GET, POST, OPTIONS, PUT, DELETE');
+    res.header('Allow', 'GET, POST, OPTIONS, PUT, DELETE');
+    next();
+});
+
+app.use(express.json());
+app.use(express.urlencoded({ extended: true }));
+
+app.get('/test' , (req , res ) => {
+    res.json( {
+        status : true ,
+        body : {
+            message : 'this is a testing'
+        }
+    })
+})
+
+
 app.listen(4000, async () => {
 
     cron.schedule('*/1 * * * *', () => {
